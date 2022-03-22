@@ -1,0 +1,30 @@
+{
+  "name": "lettershufflemenu",
+  "version": "1.0.0",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "description": "A little animation for a big menu where the letters of a word shuffle to become the first letter of each menu item.",
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "clean": "rm -rf dist/*",
+    "build:parcel": "parcel build src/index.html --no-content-hash --no-source-maps --public-url ./",
+    "build": "npm run clean && npm run build:parcel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codrops/LetterShuffleMenu.git"
+  },
+  "keywords": [],
+  "author": "Codrops",
+  "license": "MIT",
+  "homepage": "https://tympanus.net/codrops",
+  "bugs": {
+    "url": "https://github.com/codrops/LetterShuffleMenu/issues"
+  },
+  "devDependencies": {
+    "parcel": "^2.3.2"
+  },
+  "dependencies": {
+    "gsap": "^3.9.1",
+    "splitting": "^1.0.6"
+  }
+}

@@ -1,0 +1,593 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 18px;
+}
+
+body {
+	margin: 0;
+	--color-text: #867a8b;
+	--color-text-alt: #9b7749;
+	--color-link: #af4499;
+	--color-link-hover: #9b7749;
+	--color-menu: #e3dce5;
+	--color-menu-hover: #4449AF;
+	--color-menu-border: #4c2d4e;
+	color: var(--color-text);
+	background: linear-gradient(to bottom, #2b192c, #1a191c);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: acumin-pro-wide, sans-serif;
+	font-weight: 300;
+	--size-menu: 6vh;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 10000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to bottom, #2b192c, #1a191c);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5,0.5,1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	background: transparent;
+}
+
+.content a:focus-visible,
+.frame a:focus-visible {
+	/* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid var(--color-link);
+	background: transparent;
+}
+
+/* Line hover */
+.hover-line {
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+.hover-line::before {
+	content: '';
+	height: 1px;
+	width: 100%;
+	background: currentColor;
+	position: absolute;
+	top: 92%;
+	transition: transform 0.3s;
+	transform-origin: 0% 50%;
+}
+
+.hover-line:hover::before {
+	transform: scaleX(0);
+	transform-origin: 100% 50%;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+main {
+	width: 100%;
+	min-height: 100vh;
+	display: grid;
+	grid-template-columns: 10vw 10vh 10vw 5vw 32vw 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: 'side side side frame frame frame'
+						'content content content content content content';
+}
+
+.no-js main {
+	grid-template-areas: 'content content content content content content';
+}
+
+.frame {
+	position: relative;
+	color: var(--color-text-alt);
+	grid-area: frame;
+	padding: 0.75rem 1.5rem;
+	background: #2b192c;
+}
+
+.frame a {
+	pointer-events: auto;
+}
+
+.frame__title {
+	font-size: 1rem;
+	font-weight: 300;
+	margin: 0;
+	justify-self: start;
+	grid-area: title;
+}
+
+.frame__links {
+	display: inline;
+	grid-area: links;
+	padding: 0;
+	justify-self: end;
+}
+
+.frame__links a:not(:last-child) {
+	margin-right: 1rem;
+}
+
+.content {
+	grid-area: content;
+	display: grid;
+	place-content: center;
+	padding: 1rem 5vw;
+}
+
+.button-next {
+	cursor: not-allowed;
+	grid-area: content;
+	align-self: center;
+	justify-self: end;
+	width: 70px;
+	height: 140px;
+	display: none;
+	place-items: center;
+	border-radius: 70px 0 0 70px;
+	background: linear-gradient(to bottom, #9b498a, #9b7749);
+}
+
+.color-alt {
+	color: var(--color-text-alt);
+}
+
+.menu {
+	grid-area: 1 / 1 / 2 / 7;
+	display: grid;
+	grid-template-columns: 5vw 5vw 11vh 5vw 1fr;
+	grid-template-rows: auto 1fr;
+	position: relative;
+	pointer-events: none;
+	z-index: 100;
+	border-bottom: 1px solid var(--color-menu-border);
+}
+
+.no-js .menu {
+	display: none;
+}
+
+.menu__bg {
+	transform: translateX(-100%) translateX(20vw) translateX(11vh);
+	grid-area: 1 / 1 / 3 / 6;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #2b192c;
+	border-right: 1px solid var(--color-menu-border);
+	pointer-events: none;
+}
+
+.menu__button {
+	margin: 1.25rem;
+	position: relative;
+	align-self: start;
+	cursor: pointer;
+	pointer-events: auto;
+	grid-area: 1 / 1 / 2 / 3;
+	justify-self: start;
+}
+
+.menu__button path {
+	stroke: var(--color-link);
+	fill: none;
+}
+
+.menu__button:hover path,
+.menu__button:focus-visible path {
+	stroke: var(--color-menu-hover);
+}
+
+.menu__button-cross {
+	opacity: 0;
+}
+
+.menu__items {
+	grid-area: 2 / 1 / 2 / 6;
+	justify-content: start;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+	pointer-events: none;
+	margin: 1rem;
+	padding-bottom: 1rem;
+}
+
+.menu--open .menu__items {
+	pointer-events: auto;
+}
+
+.menu__item {
+	font-family: space-mono, monospace;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: var(--size-menu);
+	line-height: 0.9;
+	color: var(--color-menu);
+	position: relative;
+	cursor: pointer;
+}
+
+.menu__item span {
+	pointer-events: none;
+}
+
+.menu__item .letter-wrap__inner span:first-child,
+.menu__item .letter-wrap__inner span,
+.menu__item .letter-wrap span.char {
+	transition: color 0.2s ease;
+}
+
+.menu--open .menu__item:hover .letter-wrap__inner span:first-child,
+.menu--open .menu__item:hover .letter-wrap__inner span,
+.menu--open .menu__item:hover .letter-wrap span.char,
+.menu--open .menu__item:focus .letter-wrap__inner span:first-child,
+.menu--open .menu__item:focus .letter-wrap__inner span,
+.menu--open .menu__item:focus .letter-wrap span.char {
+	color: var(--color-menu-hover);
+}
+
+.menu--open .menu__item:focus-visible {
+	outline: 2px solid var(--color-link);
+	background: transparent;
+}
+
+.menu__item.splitting .word {
+	display: flex;
+}
+
+.menu__item.splitting .char {
+	flex: none;
+	display: flex;
+	justify-content: center;
+	transform-origin: 50% 100%;
+	will-change: transform, color;
+}
+
+.menu__item .char {
+	color: var(--color-link);
+}
+
+.letter-wrap,
+.letter-wrap__inner span,
+.menu__item.splitting .char {
+	width: calc(var(--size-menu) * 0.6666);
+	display: flex;
+	justify-content: center;
+	will-change: transform, color;
+}
+
+.letter-wrap__inner span:first-child {
+	color: var(--color-link);
+}
+
+.letter-wrap {
+	flex: none;
+	height: calc(var(--size-menu) * 0.8833);
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.letter-wrap > span:not(.letter-wrap__inner) {
+	opacity: 0;
+}
+
+.letter-wrap__inner {
+	display: flex;
+	flex-direction: column;
+	height: fit-content;
+}
+
+.menu__tagline {
+	display: none;
+	font-family: kudryashev-d-excontrast-sans, sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 1.75rem;
+	grid-area: 1 / 4 / 2 / 5;
+	text-transform: none;
+	margin: 12.5vh 0 0 1.5vw;
+	text-align: right;
+	-webkit-writing-mode: vertical-rl;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+}
+
+@media screen and (min-width: 56em) {
+	body {
+		--size-menu: 15vh;
+	}
+	main {
+		height: 100vh;
+		overflow: hidden;
+		grid-template-rows: 100%;
+		grid-template-areas: 'side side side content content content'
+	}
+
+	.menu {
+		grid-area: 1 / 1 / 2 / 6;
+		grid-template-rows: 100%;
+		border: 0;
+	}
+
+	.menu__items {
+		grid-area: 1 / 3 / 2 / 6;
+		justify-content: center;
+		margin: 1vh 0 0 0;
+		padding-bottom: 0;
+	}
+
+	.frame {
+		background: none;
+		grid-area: content;
+		display: grid;
+		align-content: space-between;
+		pointer-events: none;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: auto auto auto;
+		grid-template-areas: '... sponsor'
+						'... arrow'
+						'title links';
+	}
+
+	.frame::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+		background: linear-gradient(to bottom, #2b192c, #1a191c);
+		opacity: 0;
+		transition: opacity 1s ease-in-out 0.3s;
+	}
+
+	.menu--open ~ .frame::after {
+		opacity: 0.8;
+		transition-delay: 0s;
+		pointer-events: auto;
+	}
+
+	.menu__bg {
+		background: linear-gradient(to bottom, #2b192c, #1a191c);
+	}
+
+	.button-next {
+		display: grid;
+	}
+	.menu__tagline {
+		display: block;
+	}
+
+	.menu__button {
+		align-self: center;
+		justify-self: center;
+		margin: 0;
+		grid-area: 1 / 1 / 2 / 2;
+	}
+
+	.content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+	}
+
+	.content__column {
+		max-width: 34ch;
+		padding: 0 1.5rem;
+	}
+
+	.content__column:first-child {
+		margin-top: -10vh;
+	}
+
+	.content__column:last-child {
+		margin-top: 10vh;
+	}
+
+}
+
+/* Recommended styles for Splitting */
+.splitting .word,
+.splitting .char {
+  display: inline-block;
+}
+
+/* Psuedo-element chars */
+.splitting .char {
+  position: relative;
+}
+
+/**
+ * Populate the psuedo elements with the character to allow for expanded effects
+ * Set to `display: none` by default; just add `display: block` when you want
+ * to use the psuedo elements
+ */
+.splitting .char::before,
+.splitting .char::after {
+  content: attr(data-char);
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  transition: inherit;
+  user-select: none;
+}
+
+/* Expanded CSS Variables */
+
+.splitting {
+  /* The center word index */
+  --word-center: calc((var(--word-total) - 1) / 2);
+
+  /* The center character index */
+  --char-center: calc((var(--char-total) - 1) / 2);
+
+  /* The center character index */
+  --line-center: calc((var(--line-total) - 1) / 2);
+}
+
+.splitting .word {
+  /* Pecent (0-1) of the word's position */
+  --word-percent: calc(var(--word-index) / var(--word-total));
+
+  /* Pecent (0-1) of the line's position */
+  --line-percent: calc(var(--line-index) / var(--line-total));
+}
+
+.splitting .char {
+  /* Percent (0-1) of the char's position */
+  --char-percent: calc(var(--char-index) / var(--char-total));
+
+  /* Offset from center, positive & negative */
+  --char-offset: calc(var(--char-index) - var(--char-center));
+
+  /* Absolute distance from center, only positive */
+  --distance: calc(
+     (var(--char-offset) * var(--char-offset)) / var(--char-center)
+  );
+
+  /* Distance from center where -1 is the far left, 0 is center, 1 is far right */
+  --distance-sine: calc(var(--char-offset) / var(--char-center));
+
+  /* Distance from center where 1 is far left/far right, 0 is center */
+  --distance-percent: calc((var(--distance) / var(--char-center)));
+}
+
+.splitting.cells img { width: 100%; display: block; }
+
+@supports ( display: grid ) {
+  .splitting.cells {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    visibility: hidden;
+  }
+
+  .splitting .cell-grid {
+    background: inherit;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    display: grid;
+    grid-template: repeat( var(--row-total), 1fr ) / repeat( var(--col-total), 1fr );
+  }
+
+  .splitting .cell {
+    background: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .splitting .cell-inner {
+    background: inherit;
+    position: absolute;
+    visibility: visible;
+    /* Size to fit the whole container size */
+    width: calc(100% * var(--col-total));
+    height: calc(100% * var(--row-total));
+    /* Position properly */
+    left: calc(-100% * var(--col-index));
+    top: calc(-100% * var(--row-index));
+  }
+
+  /* Helper variables for advanced effects */
+  .splitting .cell {
+    --center-x: calc((var(--col-total) - 1) / 2);
+    --center-y: calc((var(--row-total) - 1) / 2);
+
+    /* Offset from center, positive & negative */
+    --offset-x: calc(var(--col-index) - var(--center-x));
+    --offset-y: calc(var(--row-index) - var(--center-y));
+
+    /* Absolute distance from center, only positive */
+    --distance-x: calc( (var(--offset-x) * var(--offset-x)) / var(--center-x) );
+
+    /* Absolute distance from center, only positive */
+    --distance-y: calc( (var(--offset-y) * var(--offset-y)) / var(--center-y) );
+  }
+}
+
+
+/*# sourceMappingURL=index.d046a61c.css.map */
