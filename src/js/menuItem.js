@@ -55,7 +55,7 @@ import { menuConfig } from './menuConfig';
         // The first span inside the .letter-wrap__inner is the first letter in the original link name 
         // The last span inside the .letter-wrap__inner is the nth letter (this menu item'position) in the menuConfig.displayVerticalTitle 
         const totalRandomChars = menuConfig.slotMachineTotalLetters-2;
-        const allChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const allChars = 'ABCDEFGHIJKLMNOPRSTUVWXYZ';
         
         this.DOM.chars.forEach((char, charPosition) => {
             const wrapEl = document.createElement('span');

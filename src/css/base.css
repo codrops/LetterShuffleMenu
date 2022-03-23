@@ -226,7 +226,7 @@ main {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #2b192c;
+	background: linear-gradient(to bottom, #2b192c, #1a191c);
 	border-right: 1px solid var(--color-menu-border);
 	pointer-events: none;
 }
@@ -369,7 +369,7 @@ main {
 	transform: rotate(180deg);
 }
 
-@media screen and (min-width: 56em) {
+@media screen and (min-width: 54em) {
 	body {
 		--size-menu: 15vh;
 	}
@@ -424,10 +424,6 @@ main {
 		opacity: 0.8;
 		transition-delay: 0s;
 		pointer-events: auto;
-	}
-
-	.menu__bg {
-		background: linear-gradient(to bottom, #2b192c, #1a191c);
 	}
 
 	.button-next {
