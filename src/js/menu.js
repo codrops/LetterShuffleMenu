@@ -78,6 +78,8 @@ Splitting();
         this.menuStatus.isAnimating = true;
         this.menuStatus.isOpen = true;
         
+        const gradient = {value: 'linear-gradient(to bottom, #2b192c, #1a191c)'};
+
         this.menuTimeline = gsap.timeline({
             defaults: {
                 duration: 1.7,
@@ -92,6 +94,11 @@ Splitting();
         .to(this.DOM.bg, {
             startAt: {x: -1*this.DOM.bg.offsetWidth + .2*window.innerWidth + .11*window.innerHeight},
             x: 0
+        }, 'start')
+        .to(gradient, {
+            value: 'linear-gradient(rgb(68, 37, 61), rgb(29 24 39))',
+            //value: 'linear-gradient(to bottom, #9b498a, #9b7749)',
+            onUpdate: () => this.DOM.bg.style.backgroundImage = gradient.value
         }, 'start')
         .to(this.DOM.tagline, {
             opacity: 0,
@@ -130,6 +137,8 @@ Splitting();
         if ( this.menuStatus.isAnimating || !this.menuStatus.isOpen ) return;
         this.menuStatus.isAnimating = true;
         this.menuStatus.isOpen = false;
+
+        const gradient = {value: 'linear-gradient(rgb(68, 37, 61), rgb(29 24 39))'};
         
         this.menuTimeline = gsap.timeline({
             defaults: {
@@ -172,6 +181,10 @@ Splitting();
             onComplete: () => {
                 this.DOM.bg.style.transform = 'translateX(-100%) translateX(20vw) translateX(11vh)';
             }
+        }, 'start+=0.2')
+        .to(gradient, {
+            value: 'linear-gradient(to bottom, #2b192c, #1a191c)',
+            onUpdate: () => this.DOM.bg.style.backgroundImage = gradient.value
         }, 'start+=0.2')
         .to(this.DOM.tagline, {
             opacity: 1,

@@ -12,10 +12,10 @@ body {
 	margin: 0;
 	--color-text: #867a8b;
 	--color-text-alt: #9b7749;
-	--color-link: #af4499;
+	--color-link: #6b4e65;
 	--color-link-hover: #9b7749;
 	--color-menu: #e3dce5;
-	--color-menu-hover: #4449AF;
+	--color-menu-hover: #af449a;
 	--color-menu-border: #4c2d4e;
 	color: var(--color-text);
 	background: linear-gradient(to bottom, #2b192c, #1a191c);
@@ -170,9 +170,9 @@ main {
 }
 
 .frame__links {
-	display: inline;
 	grid-area: links;
 	padding: 0;
+	margin: 1rem 0;
 	justify-self: end;
 }
 
@@ -462,6 +462,10 @@ main {
 
 	.content__column:last-child {
 		margin-top: 10vh;
+	}
+
+	.frame__links {
+		margin: 0;
 	}
 
 }
