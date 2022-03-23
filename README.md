@@ -2,7 +2,7 @@
 
 A little animation for a big menu where the letters of a word shuffle to become the first letter of each menu item.
 
-![Image Title](https://tympanus.net/codrops/wp-content/uploads/2022/03/shufflemenu_feat.jpg)
+![Image Title](https://tympanus.net/codrops/wp-content/uploads/2022/03/shufflemenu_feat-1.jpg)
 
 [Article on Codrops](https://tympanus.net/codrops/?p=59837)
 
